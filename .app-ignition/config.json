@@ -1,0 +1,54 @@
+{
+  "apps": {
+    "baddd0f5-8570-4f84-b781-ddd4a9ca97d0": {
+      "id": "baddd0f5-8570-4f84-b781-ddd4a9ca97d0",
+      "name": "MODistribuzione",
+      "framework": "laravel",
+      "settings": {
+        "installPint": true,
+        "installLarastan": true
+      },
+      "continuousIntegrationSettings": {
+        "branches": [
+          "main"
+        ],
+        "codeCoverage": false,
+        "minimumCodeCoverage": 50
+      },
+      "backendAppId": ""
+    }
+  },
+  "containers": {
+    "mysql": {
+      "MYSQL_VERSION": 8.1,
+      "MYSQL_PORT": 3306,
+      "MYSQL_ROOT_PASSWORD": "root"
+    },
+    "phpmyadmin": {
+      "PMA_HOST": "mysql",
+      "PMA_PORT": 8081,
+      "PMA_MAX_EXECUTION_TIME": 600,
+      "PMA_MEMORY_LIMIT": "256M",
+      "PMA_UPLOAD_LIMIT": "2G"
+    },
+    "mailhog": {},
+    "workspace": {
+      "PHP_VERSION": 8.2,
+      "WORKSPACE_COMPOSER_VERSION": 2,
+      "WORKSPACE_NODE_VERSION": 18,
+      "APP_CODE_CONTAINER_FLAG": ":delegated",
+      "WORKSPACE_VITE_PORT": 5172,
+      "INSTALL_XDEBUG": false,
+      "WORKSPACE_INSTALL_PCOV": false,
+      "INSTALL_IMAGEMAGICK": false,
+      "INSTALL_SSH2": false,
+      "INSTALL_XSL": false,
+      "INSTALL_STRIPE_CLI": false,
+      "INSTALL_LDAP": false
+    },
+    "nginx": {
+      "NGINX_HOST_HTTP_PORT": 80,
+      "NGINX_HOST_HTTPS_PORT": 443
+    }
+  }
+}
