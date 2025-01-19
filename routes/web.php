@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProvaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return 'Benvenuto in MO: Sempre un passo avanti a voi!';
 });
+
+Route::get('/prova/{nome}', [ProvaController::class, 'saluto']);
