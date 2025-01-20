@@ -18,6 +18,6 @@ class Product extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->withPivot('purchased_at');
+        return $this->belongsToMany(User::class)->withPivot('purchased_at', 'quantity', 'status');
     }
 }
