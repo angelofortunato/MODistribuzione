@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProvaController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return 'Benvenuto in MO: Sempre un passo avanti a voi!';
 });
+
+Route::get('/login', function () {
+    return view('login');
+});
+Route::post('/login', [LoginController::class, 'authenticate'])->name('loginUser');
 
 Route::get('/test', [ProvaController::class, 'inserimento']);
 Route::get('/simula', [ProvaController::class, 'simulaAcquisto']);
