@@ -12,10 +12,12 @@ class Product extends Model
 
     protected $fillable = [
         'name',
+        'image',
+        'price',
     ];
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->withPivot('purchased_at');
+        return $this->belongsToMany(User::class)->withPivot('purchased_at', 'quantity', 'status');
     }
 }

@@ -17,6 +17,13 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('city');
+            $table->string('address');
+            $table->string('civico');
+            $table->string('cap');
+            $table->string('ragione_sociale');
+            $table->string('partita_iva');
+            $table->string('visura_camerale');
             $table->rememberToken();
             $table->timestamps();
         });

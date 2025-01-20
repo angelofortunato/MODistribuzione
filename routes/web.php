@@ -22,7 +22,5 @@ Route::get('/', function () {
     return 'Benvenuto in MO: Sempre un passo avanti a voi!';
 });
 
-Route::get('/prova/{nome}', [ProvaController::class, 'saluto']);
-
 Route::get('/test', [ProvaController::class, 'inserimento']);
 Route::get('/simula', [ProvaController::class, 'simulaAcquisto']);
