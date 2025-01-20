@@ -20,7 +20,7 @@ class ProvaController extends Controller
         $user = new User;
         $user->name = 'Angelo';
         $user->email = 'angelo@example.it';
-        $user->password = 'qwertyui';
+        $user->password = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
         $user->city = 'Salerno';
         $user->address = 'Via Roma';
         $user->civico = 123;
@@ -45,5 +45,20 @@ class ProvaController extends Controller
         ]);
 
         return $user;
+    }
+
+    public function generaEntry()
+    {
+        /* $users = User::factory()->count(30)->create();
+        $products = Product::factory()->count(30)->create(); */
+
+        $user = User::factory()
+            ->hasAttached(
+                Product::factory()->count(3),
+                ['quantity' => 2, 'status' => 0]
+            )
+            ->create();
+
+        return 'fatto';
     }
 }

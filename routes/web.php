@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProvaController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,14 +14,18 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-/* Route::get('/', function () {
-    return view('welcome');
-}); */
-
+// Route homepage
 Route::get('/', function () {
-    return 'Benvenuto in MO: Sempre un passo avanti a voi!';
+    return view('welcome');
 });
-
+// Route di login
+Route::get('/login', function () {
+    return view('login');
+});
+Route::post('/login', [LoginController::class, 'authenticate'])->name('loginUser');
+// Route di logout
+Route::post('/logout', [LoginController::class, 'logout'])->name('logoutUser');
+// Route per prove su db
 Route::get('/test', [ProvaController::class, 'inserimento']);
 Route::get('/simula', [ProvaController::class, 'simulaAcquisto']);
+Route::get('/genera', [ProvaController::class, 'generaEntry']);
