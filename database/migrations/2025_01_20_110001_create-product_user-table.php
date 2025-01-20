@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('user_id'); */
             $table->foreignId('user_id')->constrained()->onDelete('cascade');  // FK verso la tabella users
             $table->foreignId('product_id')->constrained()->onDelete('cascade');  // FK verso la tabella products
+            $table->integer('quantity')->nullable();
             $table->timestamp('purchased_at')->default(now());  // Data di acquisto
             $table->primary(['user_id', 'product_id']);  // Chiave primaria composta
         });
