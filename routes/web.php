@@ -24,3 +24,4 @@ Route::get('/', function () {
 
 Route::get('/test', [ProvaController::class, 'inserimento']);
 Route::get('/simula', [ProvaController::class, 'simulaAcquisto']);
+Route::get('/genera', [ProvaController::class, 'generaEntry']);

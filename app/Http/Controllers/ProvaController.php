@@ -46,4 +46,19 @@ class ProvaController extends Controller
 
         return $user;
     }
+
+    public function generaEntry()
+    {
+        /* $users = User::factory()->count(30)->create();
+        $products = Product::factory()->count(30)->create(); */
+
+        $user = User::factory()
+            ->hasAttached(
+                Product::factory()->count(3),
+                ['quantity' => 2, 'status' => 0]
+            )
+            ->create();
+
+        return 'fatto';
+    }
 }
