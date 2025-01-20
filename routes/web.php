@@ -23,3 +23,5 @@ Route::get('/', function () {
 });
 
 Route::get('/prova/{nome}', [ProvaController::class, 'saluto']);
+
+Route::get('test', [ProvaController::class, 'inserimento']);
