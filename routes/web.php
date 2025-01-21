@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProvaController;
+use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+// Route di Registrazione
+Route::get('/register', function () {
+    return view('registration');
+});
+Route::post('register', [RegistrationController::class, 'register']);
 // Route di login
 Route::get('/login', function () {
     return view('login');
