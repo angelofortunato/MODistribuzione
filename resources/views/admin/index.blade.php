@@ -18,7 +18,7 @@
 <body>
 	<div class="container mt-5">
 		<h2>Admin Dashboard</h2>
-		<p>Welcome, Admin!</p>
+		<p>Welcome, {{ Auth::user()->name }}!</p>
 	</div>
 </body>
 
