@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProvaController;
 use App\Http\Controllers\RegistrationController;
@@ -28,9 +29,16 @@ Route::post('register', [RegistrationController::class, 'register']);
 Route::get('/login', function () {
     return view('login');
 });
-Route::post('/login', [LoginController::class, 'authenticate'])->name('loginUser');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
 // Route di logout
 Route::post('/logout', [LoginController::class, 'logout'])->name('logoutUser');
+
+// Route per Admin
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+
+});
+
 // Route per prove su db
 Route::get('/test', [ProvaController::class, 'inserimento']);
 Route::get('/simula', [ProvaController::class, 'simulaAcquisto']);

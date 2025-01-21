@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('ragione_sociale');
             $table->string('partita_iva');
             $table->string('visura_camerale');
+            $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -11,27 +11,44 @@
 		http-equiv="X-UA-Compatible"
 		content="ie=edge"
 	>
-	<title>Hompage</title>
+	<title>Homepage</title>
+	<link
+		rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	>
 </head>
 
 <body>
-	<h1>MODistribuzione</h1>
-	<h3>Sempre un passo avanti a voi</h3>
-	@if (session('success'))
-		<div>
-			{{ session('success') }}
-		</div>
-	@endif
+	<div class="container mt-5">
+		<h1 class="text-center">MODistribuzione</h1>
+		<h3 class="text-center">Sempre un passo avanti a voi</h3>
 
-	@auth
-		<form
-			action="{{ route('logoutUser') }}"
-			method="post"
-		>
-			@csrf
-			<button type="submit">Logout</button>
-		</form>
-	@endauth
+		@if (session('success'))
+			<div class="alert alert-success">
+				{{ session('success') }}
+			</div>
+		@endif
+
+		@if (session('error'))
+			<div class="alert alert-danger">
+				{{ session('error') }}
+			</div>
+		@endif
+
+		@auth
+			<form
+				action="{{ route('logoutUser') }}"
+				method="post"
+				class="text-center"
+			>
+				@csrf
+				<button
+					type="submit"
+					class="btn btn-primary"
+				>Logout</button>
+			</form>
+		@endauth
+	</div>
 </body>
 
 </html>

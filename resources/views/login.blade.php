@@ -79,7 +79,7 @@
 
 
 		<form
-			action="{{ route('loginUser') }}"
+			action="{{ route('login') }}"
 			method="POST"
 		>
 			@csrf
