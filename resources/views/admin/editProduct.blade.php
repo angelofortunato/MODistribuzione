@@ -11,7 +11,7 @@
 		http-equiv="X-UA-Compatible"
 		content="ie=edge"
 	>
-	<title>Inserisci Prodotto</title>
+	<title>Modifica Prodotto</title>
 	<link
 		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 		rel="stylesheet"
@@ -26,7 +26,7 @@
 		<div class="row justify-content-center">
 			<div class="col-md-8">
 				<div class="card">
-					<div class="card-header">Inserisci Prodotto</div>
+					<div class="card-header">Modifica Prodotto</div>
 					<div class="card-body">
 						@if ($errors->any())
 							<div class="alert alert-danger">
@@ -43,11 +43,12 @@
 						@endif
 
 						<form
-							action="{{ route('products.store') }}"
+							action="{{ route('products.update', $product->id) }}"
 							method="POST"
 							enctype="multipart/form-data"
 						>
 							@csrf
+							@method('PUT')
 							<div class="form-floating mb-3">
 								<input
 									type="text"
@@ -55,7 +56,7 @@
 									id="name"
 									class="form-control"
 									placeholder="Nome"
-									value="{{ old('name') }}"
+									value="{{ old('name', $product->name) }}"
 									required
 								>
 								<label for="name">Nome</label>
@@ -67,7 +68,7 @@
 								 class="form-control"
 								 placeholder="Descrizione"
 								 required
-								>{{ old('description') }}</textarea>
+								>{{ old('description', $product->description) }}</textarea>
 								<label for="description">Descrizione</label>
 							</div>
 							<div class="form-floating mb-3">
@@ -78,7 +79,7 @@
 									id="price"
 									class="form-control"
 									placeholder="Prezzo"
-									value="{{ old('price') }}"
+									value="{{ old('price', $product->price) }}"
 									required
 								>
 								<label for="price">Prezzo</label>
@@ -93,7 +94,6 @@
 									name="image"
 									id="image"
 									class="form-control"
-									required
 								>
 							</div>
 							<button
