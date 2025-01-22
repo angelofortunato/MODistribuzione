@@ -1,6 +1,5 @@
-<!-- resources/views/admin/index.blade.php -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
 	<meta charset="UTF-8">
@@ -31,17 +30,33 @@
 	@include('admin.partials.menu')
 
 	<div class="container mt-5">
-
 		<div class="row">
 			<h2>Pannello prodotti</h2>
 			<p class="lead">Prodotti disponibili su MODistribuzione</p>
 		</div>
 
-		<div class="mb-3">
+		<div class="d-flex justify-content-between mb-3">
 			<a
 				href="{{ route('products.create') }}"
 				class="btn btn-primary"
 			>Add</a>
+			<form
+				action="{{ route('admin.prodotti') }}"
+				method="GET"
+				class="d-flex"
+			>
+				<input
+					type="text"
+					name="search"
+					class="form-control me-2"
+					placeholder="Cerca per nome"
+					value="{{ request('search') }}"
+				>
+				<button
+					type="submit"
+					class="btn btn-outline-secondary"
+				>Cerca</button>
+			</form>
 		</div>
 
 		<table class="table-striped table-hover table">

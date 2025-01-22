@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -11,9 +12,14 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
-    public function prodotti()
+    public function prodotti(Request $request)
     {
-        $products = Product::all();
+        $search = $request->input('search');
+        $products = Product::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', "%{$search}%");
+            })
+            ->get();
 
         return view('admin.prodotti', compact('products'));
     }
