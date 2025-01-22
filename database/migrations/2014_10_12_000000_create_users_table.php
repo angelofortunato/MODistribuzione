@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('civico');
             $table->string('cap');
             $table->string('ragione_sociale');
-            $table->string('partita_iva');
+            $table->string('partita_iva')->unique();
             $table->string('visura_camerale');
             $table->boolean('is_admin')->default(false);
             $table->rememberToken();
