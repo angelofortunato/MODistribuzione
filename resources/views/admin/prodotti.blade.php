@@ -39,7 +39,7 @@
 
 		<div class="mb-3">
 			<a
-				href=""
+				href="{{ route('products.create') }}"
 				class="btn btn-primary"
 			>Add</a>
 		</div>
@@ -49,6 +49,7 @@
 				<tr>
 					<th scope="col">ID</th>
 					<th scope="col">Nome</th>
+					<th scope="col">Descrizione</th>
 					<th scope="col">Prezzo</th>
 				</tr>
 			</thead>
@@ -60,6 +61,7 @@
 					>
 						<td>{{ $product->id }}</td>
 						<td>{{ $product->name }}</td>
+						<td>{{ $product->description }}</td>
 						<td>{{ $product->price }}&euro;</td>
 					</tr>
 				@endforeach

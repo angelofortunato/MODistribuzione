@@ -26,6 +26,14 @@
 
 	<div class="container mt-5">
 		<h2>Dettaglio Prodotto</h2>
+		<div class="mb-3">
+			<img
+				src="{{ asset('storage/' . $product->image) }}"
+				alt="Immagine di {{ $product->name }}"
+				class="img-fluid"
+				style="height: 200px"
+			>
+		</div>
 		<table class="table-striped table">
 			<tr>
 				<th>ID</th>
