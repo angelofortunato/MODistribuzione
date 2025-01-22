@@ -36,6 +36,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logoutUser');
 // Route per Admin
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/prodotti', [AdminController::class, 'prodotti'])->name('admin.prodotti');
+    Route::get('/products/{id}', [AdminController::class, 'show'])->name('products.show');
 
 });
 

@@ -1,4 +1,3 @@
-<!-- resources/views/admin/index.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,8 +25,29 @@
 	@include('admin.partials.menu')
 
 	<div class="container mt-5">
-		<h2>Admin Dashboard</h2>
-		<p class="lead">Welcome, {{ Auth::user()->name }}!</p>
+		<h2>Dettaglio Prodotto</h2>
+		<table class="table-striped table">
+			<tr>
+				<th>ID</th>
+				<td>{{ $product->id }}</td>
+			</tr>
+			<tr>
+				<th>Nome</th>
+				<td>{{ $product->name }}</td>
+			</tr>
+			<tr>
+				<th>Descrizione</th>
+				<td>{{ $product->description }}</td>
+			</tr>
+			<tr>
+				<th>Prezzo</th>
+				<td>{{ $product->price }}&euro;</td>
+			</tr>
+		</table>
+		<a
+			href="{{ route('admin.prodotti') }}"
+			class="btn btn-primary"
+		>Back to Products</a>
 	</div>
 </body>
 

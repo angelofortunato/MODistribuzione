@@ -12,94 +12,78 @@
 		content="ie=edge"
 	>
 	<title>Login</title>
-	<style>
-		body {
-			font-family: Arial, sans-serif;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			height: 100vh;
-			background-color: #f0f0f0;
-		}
-
-		.login-container {
-			background-color: #fff;
-			padding: 20px;
-			border-radius: 8px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		}
-
-		.login-container h2 {
-			margin-bottom: 20px;
-		}
-
-		.login-container input {
-			width: 100%;
-			padding: 10px;
-			margin: 10px 0;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-		}
-
-		.login-container button {
-			width: 100%;
-			padding: 10px;
-			background-color: #007BFF;
-			color: #fff;
-			border: none;
-			border-radius: 4px;
-			cursor: pointer;
-		}
-
-		.login-container button:hover {
-			background-color: #0056b3;
-		}
-	</style>
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+		crossorigin="anonymous"
+	>
 </head>
 
-<body>
-	<div class="login-container">
-		<h2>Login</h2>
+<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"
+	></script>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-body">
+						<h2 class="card-title text-center">Login</h2>
 
-		@if ($errors->any())
-			<div>
-				<ul>
-					@foreach ($errors->all() as $error)
-						<li>{{ $error }}</li>
-					@endforeach
-				</ul>
+						@if ($errors->any())
+							<div class="alert alert-danger">
+								<ul>
+									@foreach ($errors->all() as $error)
+										<li>{{ $error }}</li>
+									@endforeach
+								</ul>
+							</div>
+						@endif
+
+						@if (session('success'))
+							<div class="alert alert-success">{{ session('success') }}</div>
+						@endif
+
+						<form
+							action="{{ route('login') }}"
+							method="POST"
+						>
+							@csrf
+							<div class="form-group">
+								<label for="email">Email</label>
+								<input
+									type="email"
+									name="email"
+									id="email"
+									class="form-control"
+									placeholder="Email"
+									value="{{ old('email') }}"
+									required
+								>
+							</div>
+							<div class="form-group mt-2">
+								<label for="password">Password</label>
+								<input
+									type="password"
+									id="password"
+									name="password"
+									class="form-control"
+									placeholder="Password"
+									required
+								>
+							</div>
+							<button
+								type="submit"
+								class="btn btn-primary btn-block mt-2"
+							>Login</button>
+						</form>
+					</div>
+				</div>
 			</div>
-		@endif
-
-		@if (@session('success'))
-			<div>{{ session('success') }}</div>
-		@endif
-
-
-
-
-		<form
-			action="{{ route('login') }}"
-			method="POST"
-		>
-			@csrf
-			<input
-				type="email"
-				name="email"
-				id="email"
-				placeholder="Email"
-				value = "{{ old('email') }}"
-				required
-			>
-			<input
-				type="password"
-				id="password"
-				name="password"
-				placeholder="Password"
-				required
-			>
-			<button type="submit">Login</button>
-		</form>
+		</div>
 	</div>
 </body>
 
