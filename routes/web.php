@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProvaController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/prodotti', [AdminController::class, 'prodotti'])->name('admin.prodotti');
     Route::get('/products/{id}', [AdminController::class, 'show'])->name('products.show');
+    Route::get('/prodotto/crea', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/prodotto/crea', [ProductController::class, 'store'])->name('products.store');
 
 });
 
