@@ -14,6 +14,10 @@
 		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 		crossorigin="anonymous"
 	>
+	<link
+		rel="stylesheet"
+		href="{{ asset('css/styles.css') }}"
+	> <!-- Importa il file CSS -->
 </head>
 
 <body>
@@ -47,40 +51,42 @@
 			class="btn btn-secondary mb-3"
 		>Apri PDF</a>
 
-		<table class="table-striped table">
-			<tr>
-				<th>ID</th>
-				<td>{{ $user->id }}</td>
-			</tr>
-			<tr>
-				<th>Nome</th>
-				<td>{{ $user->name }}</td>
-			</tr>
-			<tr>
-				<th>Email</th>
-				<td>{{ $user->email }}</td>
-			</tr>
-			<tr>
-				<th>P. IVA</th>
-				<td>{{ $user->partita_iva }}</td>
-			</tr>
-			<tr>
-				<th>Ragione Sociale</th>
-				<td>{{ $user->ragione_sociale }}</td>
-			</tr>
-			<tr>
-				<th>Città</th>
-				<td>{{ $user->city }}</td>
-			</tr>
-			<tr>
-				<th>Indirizzo</th>
-				<td>{{ $user->address }}</td>
-			</tr>
-			<tr>
-				<th>Civico</th>
-				<td>{{ $user->civico }}</td>
-			</tr>
-		</table>
+		<div class="table-responsive">
+			<table class="table-striped table">
+				<tr>
+					<th>ID</th>
+					<td>{{ $user->id }}</td>
+				</tr>
+				<tr>
+					<th>Nome</th>
+					<td>{{ $user->name }}</td>
+				</tr>
+				<tr>
+					<th>Email</th>
+					<td>{{ $user->email }}</td>
+				</tr>
+				<tr>
+					<th>P. IVA</th>
+					<td>{{ $user->partita_iva }}</td>
+				</tr>
+				<tr>
+					<th>Ragione Sociale</th>
+					<td>{{ $user->ragione_sociale }}</td>
+				</tr>
+				<tr>
+					<th>Città</th>
+					<td>{{ $user->city }}</td>
+				</tr>
+				<tr>
+					<th>Indirizzo</th>
+					<td>{{ $user->address }}</td>
+				</tr>
+				<tr>
+					<th>Civico</th>
+					<td>{{ $user->civico }}</td>
+				</tr>
+			</table>
+		</div>
 		<a
 			href="{{ route('admin.utenti') }}"
 			class="btn btn-primary"

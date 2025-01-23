@@ -18,6 +18,10 @@
 		rel="stylesheet"
 		href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
 	>
+	<link
+		rel="stylesheet"
+		href="{{ asset('css/styles.css') }}"
+	> <!-- Importa il file CSS -->
 </head>
 
 <body>
@@ -55,29 +59,31 @@
 			</form>
 		</div>
 
-		<table class="table-striped table-hover table">
-			<thead class="table-dark">
-				<tr>
-					<th scope="col">ID</th>
-					<th scope="col">Nome</th>
-					<th scope="col">Email</th>
-					<th scope="col">P. IVA</th>
-				</tr>
-			</thead>
-			<tbody class="table-group-divider">
-				@foreach ($users as $user)
-					<tr
-						class="clickable-row"
-						data-href="{{ route('users.show', $user->id) }}"
-					>
-						<td>{{ $user->id }}</td>
-						<td>{{ $user->name }}</td>
-						<td>{{ $user->email }}</td>
-						<td>{{ $user->partita_iva }}</td>
+		<div class="table-responsive">
+			<table class="table-striped table-hover table">
+				<thead class="table-dark">
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Nome</th>
+						<th scope="col">Email</th>
+						<th scope="col">P. IVA</th>
 					</tr>
-				@endforeach
-			</tbody>
-		</table>
+				</thead>
+				<tbody class="table-group-divider">
+					@foreach ($users as $user)
+						<tr
+							class="clickable-row"
+							data-href="{{ route('users.show', $user->id) }}"
+						>
+							<td>{{ $user->id }}</td>
+							<td>{{ $user->name }}</td>
+							<td>{{ $user->email }}</td>
+							<td>{{ $user->partita_iva }}</td>
+						</tr>
+					@endforeach
+				</tbody>
+			</table>
+		</div>
 	</div>
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {

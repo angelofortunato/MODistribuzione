@@ -38,17 +38,17 @@
 				>Utenti</a>
 			</div>
 
-			<div class="ms-5">
+			<div class="d-flex logout-container ms-auto">
 				@auth
 					<form
 						action="{{ route('logoutUser') }}"
 						method="post"
-						class="text-center"
+						class="w-100 text-center"
 					>
 						@csrf
 						<button
 							type="submit"
-							class="btn btn-danger"
+							class="btn btn-danger btn-logout"
 						>Logout</button>
 					</form>
 				@endauth

@@ -18,6 +18,10 @@
 		rel="stylesheet"
 		href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
 	>
+	<link
+		rel="stylesheet"
+		href="{{ asset('css/styles.css') }}"
+	> <!-- Importa il file CSS -->
 </head>
 
 <body>
@@ -58,30 +62,31 @@
 				>Cerca</button>
 			</form>
 		</div>
-
-		<table class="table-striped table-hover table">
-			<thead class="table-dark">
-				<tr>
-					<th scope="col">ID</th>
-					<th scope="col">Nome</th>
-					<th scope="col">Descrizione</th>
-					<th scope="col">Prezzo</th>
-				</tr>
-			</thead>
-			<tbody class="table-group-divider">
-				@foreach ($products as $product)
-					<tr
-						class="clickable-row"
-						data-href="{{ route('products.show', $product->id) }}"
-					>
-						<td>{{ $product->id }}</td>
-						<td>{{ $product->name }}</td>
-						<td>{{ $product->description }}</td>
-						<td>{{ $product->price }}&euro;</td>
+		<div class="table-responsive">
+			<table class="table-striped table-hover table">
+				<thead class="table-dark">
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Nome</th>
+						<th scope="col">Descrizione</th>
+						<th scope="col">Prezzo</th>
 					</tr>
-				@endforeach
-			</tbody>
-		</table>
+				</thead>
+				<tbody class="table-group-divider">
+					@foreach ($products as $product)
+						<tr
+							class="clickable-row"
+							data-href="{{ route('products.show', $product->id) }}"
+						>
+							<td>{{ $product->id }}</td>
+							<td>{{ $product->name }}</td>
+							<td>{{ $product->description }}</td>
+							<td>{{ $product->price }}&euro;</td>
+						</tr>
+					@endforeach
+				</tbody>
+			</table>
+		</div>
 	</div>
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {

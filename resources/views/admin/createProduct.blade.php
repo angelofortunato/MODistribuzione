@@ -18,6 +18,10 @@
 		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 		crossorigin="anonymous"
 	>
+	<link
+		rel="stylesheet"
+		href="{{ asset('css/styles.css') }}"
+	> <!-- Importa il file CSS -->
 </head>
 
 <body>
