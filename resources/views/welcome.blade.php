@@ -18,6 +18,10 @@
 		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 		crossorigin="anonymous"
 	>
+	<link
+		rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+	>
 </head>
 
 <body>
@@ -26,9 +30,16 @@
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"
 	></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	@include('partialUser.menuUser')
 	<div class="container mt-5">
-		<h1 class="text-center">MODistribuzione</h1>
-		<h3 class="text-center">Sempre un passo avanti a voi</h3>
+		<h1>MODistribuzione</h1>
+		<h3>Sempre un passo avanti a voi</h3>
+		@auth
+			<p class="lead">Welcome, {{ Auth::user()->name }}!</p>
+		@endauth
+
 
 		@if (session('success'))
 			<div class="alert alert-success">
@@ -42,19 +53,6 @@
 			</div>
 		@endif
 
-		@auth
-			<form
-				action="{{ route('logoutUser') }}"
-				method="post"
-				class="text-center"
-			>
-				@csrf
-				<button
-					type="submit"
-					class="btn btn-primary"
-				>Logout</button>
-			</form>
-		@endauth
 	</div>
 </body>
 
