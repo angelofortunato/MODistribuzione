@@ -9,18 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        //
         Schema::create('product_user', function (Blueprint $table) {
-            /* $table->integer('product_id');
-            $table->integer('user_id'); */
+            $table->id();  // Aggiungi una colonna id come chiave primaria
             $table->foreignId('user_id')->constrained()->onDelete('cascade');  // FK verso la tabella users
             $table->foreignId('product_id')->constrained()->onDelete('cascade');  // FK verso la tabella products
             $table->integer('quantity');
             $table->integer('status');
             $table->timestamp('purchased_at')->default(now());  // Data di acquisto
-            $table->primary(['user_id', 'product_id']);  // Chiave primaria composta
+            $table->timestamps();  // Aggiungi timestamps per created_at e updated_at
         });
     }
 

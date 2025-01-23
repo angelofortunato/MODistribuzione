@@ -36,6 +36,11 @@
 					class="nav-link"
 					href="{{ route('admin.utenti') }}"
 				>Utenti</a>
+				<a
+					class="nav-link"
+					href="{{ route('admin.product_user') }}"
+				>Ordini</a>
+
 			</div>
 
 			<div class="d-flex logout-container ms-auto">

@@ -1,4 +1,3 @@
-<!-- resources/views/admin/index.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,6 +16,10 @@
 	>
 	<link
 		rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+	>
+	<link
+		rel="stylesheet"
 		href="{{ asset('css/styles.css') }}"
 	> <!-- Importa il file CSS -->
 </head>
@@ -32,6 +35,57 @@
 	<div class="container mt-5">
 		<h2>Admin Dashboard</h2>
 		<p class="lead">Welcome, {{ Auth::user()->name }}!</p>
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="card text-center">
+					<div class="card-body">
+						<i
+							class="bi bi-box-seam"
+							style="font-size: 2rem;"
+						></i>
+						<h5 class="card-title mt-2">Prodotti</h5>
+						<p class="card-text">{{ $productCount }} prodotti disponibili</p>
+						<a
+							href="{{ route('admin.prodotti') }}"
+							class="btn btn-primary"
+						>Vai ai Prodotti</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card text-center">
+					<div class="card-body">
+						<i
+							class="bi bi-people"
+							style="font-size: 2rem;"
+						></i>
+						<h5 class="card-title mt-2">Utenti</h5>
+						<p class="card-text">{{ $userCount }} utenti registrati</p>
+						<a
+							href="{{ route('admin.utenti') }}"
+							class="btn btn-primary"
+						>Vai agli Utenti</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card text-center">
+					<div class="card-body">
+						<i
+							class="bi bi-cart"
+							style="font-size: 2rem;"
+						></i>
+						<h5 class="card-title mt-2">Ordini</h5>
+						<p class="card-text">{{ $orderCount }} ordini nuovi</p>
+						<a
+							href="{{ route('admin.product_user') }}"
+							class="btn btn-primary"
+						>Vai agli Ordini</a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 
