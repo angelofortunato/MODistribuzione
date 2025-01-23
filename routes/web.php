@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductUserController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -36,7 +38,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logoutUser');
 
 // Route per Admin
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    // Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.index');
     // Route Admin per la gestione prodotti
     Route::get('/prodotti', [ProductController::class, 'prodotti'])->name('admin.prodotti');
     Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
@@ -50,5 +53,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/utenti/{id}', [UserController::class, 'show'])->name('users.show');
     Route::delete('/utenti/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('/admin/visura/{user}', [AdminController::class, 'servePdf'])->name('admin.servePdf');
+    // Route Admin per la gestione Ordini
+    Route::get('/ordini', [ProductUserController::class, 'index'])->name('admin.product_user');
 
 });
