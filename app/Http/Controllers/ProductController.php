@@ -8,6 +8,27 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    public function prodotti(Request $request)
+    {
+        $search = $request->input('search');
+        $products = Product::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', "%{$search}%");
+            })
+            ->get();
+
+        return view('admin.prodotti', compact('products'));
+    }
+
+    public function show($id)
+    {
+        // Recupera il prodotto specifico
+        $product = Product::findOrFail($id);
+
+        // Passa il prodotto alla vista
+        return view('admin.show', compact('product'));
+    }
+
     public function create()
     {
         return view('admin.createProduct');

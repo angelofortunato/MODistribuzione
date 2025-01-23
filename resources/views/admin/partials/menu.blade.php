@@ -32,6 +32,10 @@
 					class="nav-link"
 					href="{{ route('admin.prodotti') }}"
 				>Prodotti</a>
+				<a
+					class="nav-link"
+					href="{{ route('admin.utenti') }}"
+				>Utenti</a>
 			</div>
 
 			<div class="ms-5">
