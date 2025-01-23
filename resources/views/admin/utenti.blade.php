@@ -35,17 +35,13 @@
 
 	<div class="container mt-5">
 		<div class="row">
-			<h2>Pannello prodotti</h2>
-			<p class="lead">Prodotti disponibili su MODistribuzione</p>
+			<h2>Pannello Utenti</h2>
+			<p class="lead">Utenti registrati su MODistribuzione</p>
 		</div>
 
 		<div class="d-flex justify-content-between mb-3">
-			<a
-				href="{{ route('products.create') }}"
-				class="btn btn-primary"
-			>Add</a>
 			<form
-				action="{{ route('admin.prodotti') }}"
+				action=""
 				method="GET"
 				class="d-flex"
 			>
@@ -62,26 +58,27 @@
 				>Cerca</button>
 			</form>
 		</div>
+
 		<div class="table-responsive">
 			<table class="table-striped table-hover table">
 				<thead class="table-dark">
 					<tr>
 						<th scope="col">ID</th>
 						<th scope="col">Nome</th>
-						<th scope="col">Descrizione</th>
-						<th scope="col">Prezzo</th>
+						<th scope="col">Email</th>
+						<th scope="col">P. IVA</th>
 					</tr>
 				</thead>
 				<tbody class="table-group-divider">
-					@foreach ($products as $product)
+					@foreach ($users as $user)
 						<tr
 							class="clickable-row"
-							data-href="{{ route('products.show', $product->id) }}"
+							data-href="{{ route('users.show', $user->id) }}"
 						>
-							<td>{{ $product->id }}</td>
-							<td>{{ $product->name }}</td>
-							<td>{{ $product->description }}</td>
-							<td>{{ $product->price }}&euro;</td>
+							<td>{{ $user->id }}</td>
+							<td>{{ $user->name }}</td>
+							<td>{{ $user->email }}</td>
+							<td>{{ $user->partita_iva }}</td>
 						</tr>
 					@endforeach
 				</tbody>

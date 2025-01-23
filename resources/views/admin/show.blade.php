@@ -14,6 +14,10 @@
 		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 		crossorigin="anonymous"
 	>
+	<link
+		rel="stylesheet"
+		href="{{ asset('css/styles.css') }}"
+	> <!-- Importa il file CSS -->
 </head>
 
 <body>
@@ -34,6 +38,25 @@
 				style="height: 200px"
 			>
 		</div>
+		<a
+			href="{{ route('products.edit', $product->id) }}"
+			class="btn btn-warning my-3"
+		>Modifica</a>
+
+		<form
+			action="{{ route('products.destroy', $product->id) }}"
+			method="POST"
+			class="d-inline"
+		>
+			@csrf
+			@method('DELETE')
+			<button
+				type="submit"
+				class="btn btn-danger"
+				onclick="return confirm('Sei sicuro di voler eliminare questo prodotto?')"
+			>Elimina</button>
+		</form>
+
 		<table class="table-striped table">
 			<tr>
 				<th>ID</th>

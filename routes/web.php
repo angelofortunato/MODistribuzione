@@ -3,8 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProvaController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,14 +37,18 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logoutUser');
 // Route per Admin
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-    Route::get('/prodotti', [AdminController::class, 'prodotti'])->name('admin.prodotti');
-    Route::get('/products/{id}', [AdminController::class, 'show'])->name('products.show');
+    // Route Admin per la gestione prodotti
+    Route::get('/prodotti', [ProductController::class, 'prodotti'])->name('admin.prodotti');
+    Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
     Route::get('/prodotto/crea', [ProductController::class, 'create'])->name('products.create');
     Route::post('/prodotto/crea', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+    // Route Admin per la gestione Utenti
+    Route::get('/utenti', [UserController::class, 'utenti'])->name('admin.utenti');
+    Route::get('/utenti/{id}', [UserController::class, 'show'])->name('users.show');
+    Route::delete('/utenti/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::get('/admin/visura/{user}', [AdminController::class, 'servePdf'])->name('admin.servePdf');
 
 });
-
-// Route per prove su db
-Route::get('/test', [ProvaController::class, 'inserimento']);
-Route::get('/simula', [ProvaController::class, 'simulaAcquisto']);
-Route::get('/genera', [ProvaController::class, 'generaEntry']);
