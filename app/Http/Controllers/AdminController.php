@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use Illuminate\Http\Request;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -12,24 +11,16 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
-    public function prodotti(Request $request)
+    public function servePdf(User $user)
     {
-        $search = $request->input('search');
-        $products = Product::query()
-            ->when($search, function ($query, $search) {
-                return $query->where('name', 'like', "%{$search}%");
-            })
-            ->get();
+        // Verifica se l'utente autenticato è un amministratore
+        if (auth()->user()->is_admin) {
+            $pathToFile = storage_path('app/public/'.$user->visura_camerale);
 
-        return view('admin.prodotti', compact('products'));
-    }
+            return response()->file($pathToFile);
+        }
 
-    public function show($id)
-    {
-        // Recupera il prodotto specifico
-        $product = Product::findOrFail($id);
-
-        // Passa il prodotto alla vista
-        return view('admin.show', compact('product'));
+        // Se l'utente non è un amministratore, mostra un errore 403
+        abort(403, 'Accesso negato');
     }
 }
