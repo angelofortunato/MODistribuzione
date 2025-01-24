@@ -25,6 +25,7 @@ class User extends Authenticatable
         'city',
         'address',
         'civico',
+        'cap',
         'ragione_sociale',
         'partita_iva',
         'visura_camerale',

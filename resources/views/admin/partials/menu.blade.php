@@ -1,5 +1,5 @@
 <nav
-	class="navbar navbar-expand-lg bg-body-tertiary"
+	class="navbar navbar-expand-lg bg-body-tertiary fixed-top"
 	data-bs-theme="dark"
 >
 	<div class="container-fluid">
@@ -40,7 +40,6 @@
 					class="nav-link"
 					href="{{ route('admin.product_user') }}"
 				>Ordini</a>
-
 			</div>
 
 			<div class="d-flex logout-container ms-auto">
@@ -58,7 +57,6 @@
 					</form>
 				@endauth
 			</div>
-
 		</div>
 	</div>
 </nav>

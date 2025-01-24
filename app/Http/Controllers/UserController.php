@@ -53,4 +53,14 @@ class UserController extends Controller
 
         return redirect()->route('users.show', $user->id)->with('success', 'User status updated successfully.');
     }
+
+    public function generateUsers(int $count)
+    {
+        // Genera i utenti utilizzando la factory
+        User::factory()->count($count)->create();
+
+        return response()->json([
+            'message' => "$count utenti generati con successo!",
+        ]);
+    }
 }

@@ -40,7 +40,7 @@ class ProductController extends Controller
             'name'        => 'required|string|max:255',
             'description' => 'required|string',
             'price'       => 'required|numeric',
-            'image'       => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'categoria'   => 'required|string|max:255',
 
         ]);
@@ -71,7 +71,7 @@ class ProductController extends Controller
             'name'        => 'required|string|max:255',
             'description' => 'required|string',
             'price'       => 'required|numeric',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $product = Product::findOrFail($id);
@@ -110,5 +110,15 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('admin.prodotti')->with('success', 'Product deleted successfully.');
+    }
+
+    public function generateProducts(int $count)
+    {
+        // Genera i prodotti utilizzando la factory
+        Product::factory()->count($count)->create();
+
+        return response()->json([
+            'message' => "$count prodotti generati con successo!",
+        ]);
     }
 }
