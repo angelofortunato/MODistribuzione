@@ -15,6 +15,10 @@ class Product extends Model
         'image',
         'description',
         'price',
+        'deposito',
+        'is_offerta',
+        'is_active',
+        'categoria',
     ];
 
     public function users(): BelongsToMany

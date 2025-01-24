@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
 	<meta charset="UTF-8">
@@ -31,25 +31,42 @@
 	<div class="container mt-5">
 		<h2>Dettaglio Utente</h2>
 
-		<form
-			action="{{ route('users.destroy', $user->id) }}"
-			method="POST"
-			class="d-inline"
-		>
-			@csrf
-			@method('DELETE')
-			<button
-				type="submit"
-				class="btn btn-danger mb-3"
-				onclick="return confirm('Sei sicuro di voler eliminare questo Utente?')"
-			>Elimina</button>
-		</form>
+		<div class="d-flex justify-content-between mb-3">
+			<form
+				action="{{ route('users.destroy', $user->id) }}"
+				method="POST"
+				class="d-inline"
+			>
+				@csrf
+				@method('DELETE')
+				<button
+					type="submit"
+					class="btn btn-danger"
+					onclick="return confirm('Sei sicuro di voler eliminare questo Utente?')"
+				>Elimina</button>
+			</form>
 
-		<a
-			href="{{ route('admin.servePdf', $user->id) }}"
-			target="_blank"
-			class="btn btn-secondary mb-3"
-		>Apri PDF</a>
+			<a
+				href="{{ route('admin.servePdf', $user->id) }}"
+				target="_blank"
+				class="btn btn-secondary"
+			>Apri PDF</a>
+
+			<form
+				action="{{ route('users.toggleActive', $user->id) }}"
+				method="POST"
+				class="d-inline"
+			>
+				@csrf
+				<button
+					type="submit"
+					class="btn btn-warning"
+					onclick="return confirm('Sei sicuro di voler {{ $user->is_active ? 'disattivare' : 'attivare' }} questo Utente?')"
+				>
+					{{ $user->is_active ? 'Disattiva' : 'Attiva' }}
+				</button>
+			</form>
+		</div>
 
 		<div class="table-responsive">
 			<table class="table-striped table">
@@ -84,6 +101,14 @@
 				<tr>
 					<th>Civico</th>
 					<td>{{ $user->civico }}</td>
+				</tr>
+				<tr>
+					<th>Telefono</th>
+					<td>{{ $user->telefono }}</td>
+				</tr>
+				<tr>
+					<th>Attivo</th>
+					<td>{{ $user->is_active ? 'Si' : 'No' }}</td>
 				</tr>
 			</table>
 		</div>

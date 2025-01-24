@@ -56,4 +56,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // Route Admin per la gestione Ordini
     Route::get('/ordini', [ProductUserController::class, 'index'])->name('admin.product_user');
 
+    Route::post('/utenti/{id}/toggle-active', [UserController::class, 'toggleActive'])->name('users.toggleActive');
+
 });

@@ -41,6 +41,8 @@ class ProductController extends Controller
             'description' => 'required|string',
             'price'       => 'required|numeric',
             'image'       => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'categoria'   => 'required|string|max:255',
+
         ]);
 
         $imagePath = $request->file('image')->store('images', 'public');
@@ -49,6 +51,7 @@ class ProductController extends Controller
             'name'        => $request->name,
             'description' => $request->description,
             'price'       => $request->price,
+            'categoria'   => $request->categoria,
             'image'       => $imagePath,
         ]);
 
@@ -87,6 +90,8 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
+        $product->is_active = $request->has('is_active') ? true : false;
+        $product->is_offerta = $request->has('is_offerta') ? true : false;
         $product->save();
 
         return redirect()->route('products.show', $product->id)->with('success', 'Product updated successfully.');

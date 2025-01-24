@@ -169,6 +169,18 @@
 				>
 				<label for="partita_iva">Partita IVA</label>
 			</div>
+			<div class="form-floating mb-3">
+				<input
+					type="tel"
+					class="form-control"
+					name="telefono"
+					id="telefono"
+					placeholder="Telefono"
+					value="{{ old('telefono') }}"
+					required
+				>
+				<label for="telefono">Telefono</label>
+			</div>
 			<div class="mb-3">
 				<label
 					for="visura_camerale"

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('telefono')->nullable();
             $table->string('city');
             $table->string('address');
             $table->string('civico');
@@ -25,6 +26,7 @@ return new class extends Migration
             $table->string('partita_iva')->unique();
             $table->string('visura_camerale');
             $table->boolean('is_admin')->default(false);
+            $table->boolean('is_active')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

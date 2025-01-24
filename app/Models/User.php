@@ -28,6 +28,8 @@ class User extends Authenticatable
         'ragione_sociale',
         'partita_iva',
         'visura_camerale',
+        'is_active',
+        'telefono',
     ];
 
     /**

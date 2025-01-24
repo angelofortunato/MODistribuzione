@@ -67,6 +67,7 @@
 						<th scope="col">Nome</th>
 						<th scope="col">Email</th>
 						<th scope="col">P. IVA</th>
+						<th scope="col">Stato</th> <!-- Nuova colonna per il badge -->
 					</tr>
 				</thead>
 				<tbody class="table-group-divider">
@@ -79,6 +80,11 @@
 							<td>{{ $user->name }}</td>
 							<td>{{ $user->email }}</td>
 							<td>{{ $user->partita_iva }}</td>
+							<td>
+								@if (!$user->is_active)
+									<span class="badge bg-danger">Inactive</span>
+								@endif
+							</td>
 						</tr>
 					@endforeach
 				</tbody>

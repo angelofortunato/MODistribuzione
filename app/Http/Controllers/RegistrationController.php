@@ -22,6 +22,7 @@ class RegistrationController extends Controller
             'cap'             => 'required|string|max:255',
             'ragione_sociale' => 'required|string|max:255',
             'partita_iva'     => 'required|string|max:255',
+            'telefono'        => 'required|string|max:11',
             'visura_camerale' => 'required|mimes:pdf|max:2048',
         ]);
 
@@ -41,6 +42,7 @@ class RegistrationController extends Controller
             $user->cap = $request->cap;
             $user->ragione_sociale = $request->ragione_sociale;
             $user->partita_iva = $request->partita_iva;
+            $user->telefono = $request->telefono;
             $user->visura_camerale = $path; // Salva il percorso del file PDF in visura_camerale
             $user->save();
 
