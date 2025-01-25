@@ -70,8 +70,8 @@
 			id="navbarNav"
 		>
 			<div class="row w-100">
-				<div class="col-lg-3 d-flex align-items-center">
-					<ul class="navbar-nav">
+				<div class="col-lg-3 d-flex align-items-center justify-content-start">
+					<ul class="navbar-nav ms-3">
 						<li class="nav-item">
 							<a
 								class="nav-link"
@@ -80,8 +80,8 @@
 						</li>
 					</ul>
 				</div>
-				<div class="col-lg-6 d-flex justify-content-center">
-					<form class="d-flex w-100">
+				<div class="col-lg-6 d-flex justify-content-start">
+					<form class="d-flex w-100 ms-3">
 						<input
 							class="form-control me-2"
 							type="search"
