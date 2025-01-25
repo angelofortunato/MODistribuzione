@@ -20,9 +20,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Route homepage
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ProductController::class, 'indexUser'])->name('user.index');
+
 // Route di Registrazione
 Route::get('/register', function () {
     return view('registration');

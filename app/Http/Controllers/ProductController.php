@@ -121,4 +121,14 @@ class ProductController extends Controller
             'message' => "$count prodotti generati con successo!",
         ]);
     }
+
+    // Funzioni per interfaccia user
+    public function indexUser()
+    {
+        $productsOnOffer = Product::where('is_offerta', true)
+            ->where('is_active', true)
+            ->get();
+
+        return view('welcome', compact('productsOnOffer'));
+    }
 }
