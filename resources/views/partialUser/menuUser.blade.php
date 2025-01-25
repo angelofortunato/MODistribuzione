@@ -36,6 +36,12 @@
 						aria-labelledby="dropdownUser2"
 					>
 						<li>
+							<a
+								class="dropdown-item"
+								href="{{ route('user.profilo') }}"
+							>Profilo</a>
+						</li>
+						<li>
 							<form
 								id="logout-form-mobile"
 								action="{{ route('logoutUser') }}"
@@ -122,6 +128,12 @@
 								class="dropdown-menu dropdown-menu-end"
 								aria-labelledby="dropdownUser1"
 							>
+								<li>
+									<a
+										class="dropdown-item"
+										href="{{ route('user.profilo') }}"
+									>Profilo</a>
+								</li>
 								<li>
 									<form
 										id="logout-form-desktop"

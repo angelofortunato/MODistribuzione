@@ -41,7 +41,7 @@
 		>
 			<div class="card-body">
 				<h2 class="card-title display-3 text-center">MODistribuzione</h2>
-
+				<h3 class="lead text-center">Sempre un passo avanti</h3>
 				@if ($errors->any())
 					<div class="alert alert-danger">
 						<ul>

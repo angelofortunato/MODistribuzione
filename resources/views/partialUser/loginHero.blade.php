@@ -11,7 +11,7 @@
 				<p>MODistribuzione è la tua piattaforma di fiducia per una vasta gamma di prodotti di alta qualità a prezzi
 					competitivi. La nostra piattaforma è facile da usare e il nostro servizio clienti è sempre pronto ad aiutarti.</p>
 				<a
-					href="#"
+					href="{{ route('user.profilo') }}"
 					class="btn btn-secondary mb-3"
 				>Vedi il profilo</a>
 				@if (Auth::user()->is_admin)

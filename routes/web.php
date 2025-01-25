@@ -59,3 +59,16 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/generate-products/{count}', [ProductController::class, 'generateProducts']);
     Route::get('/generate-users/{count}', [UserController::class, 'generateUsers']);
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profilo', function () {
+        // Solo utenti autenticati possono accedere a questa rotta
+        return view('profilo');
+    })->name('user.profilo');
+
+    Route::get('/profilo/modifica-password', function () {
+        // Solo utenti autenticati possono accedere a questa rotta
+        return view('modificaPass');
+    })->name('user.modifyPass');
+    Route::post('/user/update-password', [UserController::class, 'updatePassword'])->name('user.updatePassword');
+});
