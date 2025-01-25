@@ -35,9 +35,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 
 	<div class="col-12 col-lg-8 container mt-5">
-		<div class="card">
+		<div
+			class="card"
+			style="margin-top: 150px; margin-bottom: 250px;"
+		>
 			<div class="card-body">
-				<h2 class="card-title text-center">Login</h2>
+				<h2 class="card-title display-3 text-center">MODistribuzione</h2>
 
 				@if ($errors->any())
 					<div class="alert alert-danger">
@@ -56,10 +59,10 @@
 				<form
 					action="{{ route('login') }}"
 					method="POST"
+					style="margin-top: 50px;"
 				>
 					@csrf
-					<div class="form-group">
-						<label for="email">Email</label>
+					<div class="form-floating mb-3">
 						<input
 							type="email"
 							name="email"
@@ -69,9 +72,9 @@
 							value="{{ old('email') }}"
 							required
 						>
+						<label for="email">Email</label>
 					</div>
-					<div class="form-group mt-2">
-						<label for="password">Password</label>
+					<div class="form-floating mb-3">
 						<input
 							type="password"
 							id="password"
@@ -80,16 +83,17 @@
 							placeholder="Password"
 							required
 						>
+						<label for="password">Password</label>
 					</div>
 					<button
 						type="submit"
-						class="btn btn-primary btn-block mt-2"
-					>Login</button>
+						class="btn btn-primary btn-block mt-3"
+					>Accedi</button>
 				</form>
 			</div>
 		</div>
 	</div>
-
+	@include('partialUser.footer')
 </body>
 
 </html>

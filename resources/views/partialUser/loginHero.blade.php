@@ -1,6 +1,28 @@
 @auth
-	<h1 class="display-4">MODistribuzione</h1>
-	<p class="lead">Welcome, {{ Auth::user()->name }}!</p>
+	<!-- Hero  per accesso utente -->
+	<div class="hero">
+		<div class="row">
+			<div class="col-md-6">
+				<h1 class="display-4">MODistribuzione</h1>
+				<p class="lead">Welcome, {{ Auth::user()->name }}!</p>
+			</div>
+			<div class="col-md-6">
+				<h2>Descrizione del sito</h2>
+				<p>MODistribuzione è la tua piattaforma di fiducia per una vasta gamma di prodotti di alta qualità a prezzi
+					competitivi. La nostra piattaforma è facile da usare e il nostro servizio clienti è sempre pronto ad aiutarti.</p>
+				<a
+					href="#"
+					class="btn btn-secondary mb-3"
+				>Vedi il profilo</a>
+				@if (Auth::user()->is_admin)
+					<a
+						href="{{ route('admin.index') }}"
+						class="btn btn-primary mb-3"
+					>Vai in admin</a>
+				@endif
+			</div>
+		</div>
+	</div>
 @else
 	<!-- Hero  per il login dell'utente -->
 	<div class="hero">
@@ -53,9 +75,14 @@
 			</div>
 			<div class="col-md-6">
 				<h2>Perché scegliere MODistribuzione?</h2>
-				<p>MODistribuzione offre una vasta gamma di prodotti di alta qualità a prezzi competitivi. La nostra
-					piattaforma è facile da usare e il nostro servizio clienti è sempre pronto ad aiutarti.</p>
+				<p>MODistribuzione offre una vasta gamma di prodotti di alta qualità a prezzi competitivi. La nostra piattaforma è
+					facile da usare e il nostro servizio clienti è sempre pronto ad aiutarti.</p>
 				<p>Registrati oggi stesso e scopri tutti i vantaggi di essere un nostro cliente!</p>
+				<!-- Aggiungi il pulsante di registrazione qui -->
+				<a
+					href="{{ route('user.register') }}"
+					class="btn btn-secondary mb-3"
+				>Registrati</a>
 			</div>
 		</div>
 	</div>

@@ -25,8 +25,8 @@ Route::get('/', [ProductController::class, 'indexUser'])->name('user.index');
 // Route di Registrazione
 Route::get('/register', function () {
     return view('registration');
-});
-Route::post('register', [RegistrationController::class, 'register']);
+})->name('user.register');
+Route::post('/register', [RegistrationController::class, 'register']);
 // Route di login
 Route::get('/login', function () {
     return view('login');
