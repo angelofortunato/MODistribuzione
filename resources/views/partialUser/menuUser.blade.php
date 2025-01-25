@@ -1,5 +1,5 @@
 <nav
-	class="navbar navbar-expand-lg bg-body-tertiary"
+	class="navbar navbar-expand-lg bg-body-tertiary fixed-top"
 	data-bs-theme="dark"
 >
 	<div class="container-fluid">

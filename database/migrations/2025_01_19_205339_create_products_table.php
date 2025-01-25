@@ -17,6 +17,10 @@ return new class extends Migration
             $table->string('image');
             $table->text('description')->nullable();
             $table->decimal('price', 8, 2);
+            $table->integer('deposito')->default(1);
+            $table->boolean('is_offerta')->default(false);
+            $table->boolean('is_active')->default(true);
+            $table->string('categoria')->nullable();
             $table->timestamps();
 
         });

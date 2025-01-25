@@ -70,6 +70,7 @@
 						<th scope="col">Nome</th>
 						<th scope="col">Descrizione</th>
 						<th scope="col">Prezzo</th>
+						<th scope="col">Stato</th>
 					</tr>
 				</thead>
 				<tbody class="table-group-divider">
@@ -82,6 +83,14 @@
 							<td>{{ $product->name }}</td>
 							<td>{{ $product->description }}</td>
 							<td>{{ $product->price }}&euro;</td>
+							<td>
+								@if (!$product->is_active)
+									<span class="badge bg-danger">Non Attivo</span>
+								@endif
+								@if ($product->is_offerta)
+									<span class="badge bg-success">In Offerta</span>
+								@endif
+							</td>
 						</tr>
 					@endforeach
 				</tbody>

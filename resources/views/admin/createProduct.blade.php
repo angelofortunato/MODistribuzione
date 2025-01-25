@@ -87,6 +87,17 @@
 								>
 								<label for="price">Prezzo</label>
 							</div>
+							<div class="form-floating mb-3">
+								<select
+									name="categoria"
+									id="categoria"
+									class="form-select"
+									required
+								>
+									<option value="bevande">Bevande</option>
+								</select>
+								<label for="categoria">Categoria</label>
+							</div>
 							<div class="mb-3">
 								<label
 									for="image"
@@ -117,5 +128,3 @@
 		crossorigin="anonymous"
 	></script>
 </body>
-
-</html>

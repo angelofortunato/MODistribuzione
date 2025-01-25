@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
 	<meta charset="UTF-8">
@@ -71,8 +71,20 @@
 				<td>{{ $product->description }}</td>
 			</tr>
 			<tr>
+				<th>Categoria</th>
+				<td>{{ $product->categoria }}</td>
+			</tr>
+			<tr>
 				<th>Prezzo</th>
 				<td>{{ $product->price }}&euro;</td>
+			</tr>
+			<tr>
+				<th>Attivo</th>
+				<td>{{ $product->is_active ? 'Sì' : 'No' }}</td>
+			</tr>
+			<tr>
+				<th>In offerta</th>
+				<td>{{ $product->is_offerta ? 'Sì' : 'No' }}</td>
 			</tr>
 		</table>
 		<a

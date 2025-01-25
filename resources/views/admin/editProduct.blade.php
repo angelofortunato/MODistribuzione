@@ -88,6 +88,46 @@
 								>
 								<label for="price">Prezzo</label>
 							</div>
+							<div class="form-floating mb-3">
+								<select
+									name="category"
+									id="category"
+									class="form-select"
+									required
+								>
+									<option
+										value="bevande"
+										{{ old('category', $product->category) == 'bevande' ? 'selected' : '' }}
+									>Bevande</option>
+								</select>
+								<label for="category">Categoria</label>
+							</div>
+							<div class="form-check form-switch mb-3">
+								<input
+									class="form-check-input"
+									type="checkbox"
+									id="is_active"
+									name="is_active"
+									{{ old('is_active', $product->is_active) ? 'checked' : '' }}
+								>
+								<label
+									class="form-check-label"
+									for="is_active"
+								>Attivo</label>
+							</div>
+							<div class="form-check form-switch mb-3">
+								<input
+									class="form-check-input"
+									type="checkbox"
+									id="is_offerta"
+									name="is_offerta"
+									{{ old('is_offerta', $product->is_offerta) ? 'checked' : '' }}
+								>
+								<label
+									class="form-check-label"
+									for="is_offerta"
+								>Offerta</label>
+							</div>
 							<div class="mb-3">
 								<label
 									for="image"

@@ -20,9 +20,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Route homepage
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ProductController::class, 'indexUser'])->name('user.index');
+
 // Route di Registrazione
 Route::get('/register', function () {
     return view('registration');
@@ -52,8 +51,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/utenti', [UserController::class, 'utenti'])->name('admin.utenti');
     Route::get('/utenti/{id}', [UserController::class, 'show'])->name('users.show');
     Route::delete('/utenti/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::post('/utenti/{id}/toggle-active', [UserController::class, 'toggleActive'])->name('users.toggleActive');
     Route::get('/admin/visura/{user}', [AdminController::class, 'servePdf'])->name('admin.servePdf');
     // Route Admin per la gestione Ordini
     Route::get('/ordini', [ProductUserController::class, 'index'])->name('admin.product_user');
-
+    // Route generazione elementi nel database
+    Route::get('/generate-products/{count}', [ProductController::class, 'generateProducts']);
+    Route::get('/generate-users/{count}', [UserController::class, 'generateUsers']);
 });

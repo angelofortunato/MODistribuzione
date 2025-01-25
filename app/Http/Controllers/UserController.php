@@ -44,4 +44,23 @@ class UserController extends Controller
 
         return redirect()->route('admin.utenti')->with('success', 'User deleted successfully.');
     }
+
+    public function toggleActive($id)
+    {
+        $user = User::findOrFail($id);
+        $user->is_active = ! $user->is_active;
+        $user->save();
+
+        return redirect()->route('users.show', $user->id)->with('success', 'User status updated successfully.');
+    }
+
+    public function generateUsers(int $count)
+    {
+        // Genera i utenti utilizzando la factory
+        User::factory()->count($count)->create();
+
+        return response()->json([
+            'message' => "$count utenti generati con successo!",
+        ]);
+    }
 }

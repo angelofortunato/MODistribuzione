@@ -40,7 +40,9 @@ class ProductController extends Controller
             'name'        => 'required|string|max:255',
             'description' => 'required|string',
             'price'       => 'required|numeric',
-            'image'       => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'categoria'   => 'required|string|max:255',
+
         ]);
 
         $imagePath = $request->file('image')->store('images', 'public');
@@ -49,6 +51,7 @@ class ProductController extends Controller
             'name'        => $request->name,
             'description' => $request->description,
             'price'       => $request->price,
+            'categoria'   => $request->categoria,
             'image'       => $imagePath,
         ]);
 
@@ -68,7 +71,7 @@ class ProductController extends Controller
             'name'        => 'required|string|max:255',
             'description' => 'required|string',
             'price'       => 'required|numeric',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $product = Product::findOrFail($id);
@@ -87,6 +90,8 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
+        $product->is_active = $request->has('is_active') ? true : false;
+        $product->is_offerta = $request->has('is_offerta') ? true : false;
         $product->save();
 
         return redirect()->route('products.show', $product->id)->with('success', 'Product updated successfully.');
@@ -105,5 +110,25 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('admin.prodotti')->with('success', 'Product deleted successfully.');
+    }
+
+    public function generateProducts(int $count)
+    {
+        // Genera i prodotti utilizzando la factory
+        Product::factory()->count($count)->create();
+
+        return response()->json([
+            'message' => "$count prodotti generati con successo!",
+        ]);
+    }
+
+    // Funzioni per interfaccia user
+    public function indexUser()
+    {
+        $productsOnOffer = Product::where('is_offerta', true)
+            ->where('is_active', true)
+            ->get();
+
+        return view('welcome', compact('productsOnOffer'));
     }
 }

@@ -28,7 +28,8 @@ class UserFactory extends Factory
             'cap'               => '84'.fake()->numberBetween(100, 200),
             'ragione_sociale'   => fake()->name().' srl',
             'partita_iva'       => fake()->ean8(),
-            'visura_camerale'   => fake()->userName().'.pdf',
+            'visura_camerale'   => 'pdfs/prova.pdf',
+            'telefono'          => '123456789',
             'remember_token'    => Str::random(10),
         ];
     }

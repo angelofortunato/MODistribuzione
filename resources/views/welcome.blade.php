@@ -22,6 +22,10 @@
 		rel="stylesheet"
 		href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
 	>
+	<link
+		rel="stylesheet"
+		href="{{ asset('css/welcome.css') }}"
+	> <!-- Importa il file CSS -->
 </head>
 
 <body>
@@ -30,28 +34,16 @@
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"
 	></script>
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+
 	@include('partialUser.menuUser')
-	<div class="container mt-5">
-		<h1>MODistribuzione</h1>
-		<h3>Sempre un passo avanti a voi</h3>
-		@auth
-			<p class="lead">Welcome, {{ Auth::user()->name }}!</p>
-		@endauth
 
+	<div class="container-fluid mt-5">
 
-		@if (session('success'))
-			<div class="alert alert-success">
-				{{ session('success') }}
-			</div>
-		@endif
+		@include('partialUser.loginHero')
 
-		@if (session('error'))
-			<div class="alert alert-danger">
-				{{ session('error') }}
-			</div>
-		@endif
+		@include('partialUser.offerteHero')
 
 	</div>
 </body>
