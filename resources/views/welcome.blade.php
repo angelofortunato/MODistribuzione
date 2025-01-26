@@ -51,7 +51,7 @@
 				<h1 class="display-4">Scopri i nostri prodotti!</h1>
 				<p class="lead">Esplora la nostra vasta gamma di prodotti di alta qualità a prezzi competitivi.</p>
 				<a
-					href="#"
+					href="{{ route('user.listino') }}"
 					class="btn btn-primary"
 				>Vai alla sezione prodotti</a>
 			</div>

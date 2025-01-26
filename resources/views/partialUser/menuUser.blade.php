@@ -9,7 +9,7 @@
 		>MODistribuzione</a>
 		<div class="d-flex ms-auto">
 			<a
-				href="#"
+				href="{{ route('cart.index') }}"
 				class="d-lg-none me-3"
 			>
 				<i
@@ -84,25 +84,36 @@
 								href="/"
 							>Home</a>
 						</li>
+						<li class="nav-item">
+							<a
+								class="nav-link"
+								href="{{ route('user.listino') }}"
+							>Prodotti</a>
+						</li>
 					</ul>
 				</div>
 				<div class="col-lg-6 d-flex justify-content-start">
-					<form class="d-flex w-100 ms-3">
+					<form
+						class="d-flex w-100 ms-3"
+						method="GET"
+						action="{{ route('user.listino') }}"
+					>
 						<input
 							class="form-control me-2"
 							type="search"
+							name="search"
 							placeholder="Search"
 							aria-label="Search"
 						>
 						<button
 							class="btn btn-outline-success"
 							type="submit"
-						><i class="bi bi-search px-2"></i></button><!--Tasto Cerca -->
+						><i class="bi bi-search px-2"></i></button>
 					</form>
 				</div>
 				<div class="col-lg-3 d-none d-lg-flex justify-content-end align-items-center">
 					<a
-						href="#"
+						href="{{ route('cart.index') }}"
 						class="me-3"
 					>
 						<i

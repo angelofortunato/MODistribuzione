@@ -131,4 +131,18 @@ class ProductController extends Controller
 
         return view('welcome', compact('productsOnOffer'));
     }
+
+    public function showListino(Request $request)
+    {
+        $query = $request->input('search');
+        if ($query) {
+            $products = Product::where('is_active', true)
+                ->where('name', 'like', '%'.$query.'%')
+                ->paginate(12);
+        } else {
+            $products = Product::where('is_active', true)->paginate(12);
+        }
+
+        return view('listinoUser', compact('products'));
+    }
 }

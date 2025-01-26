@@ -5,6 +5,11 @@
 			<div class="col-md-6">
 				<h1 class="display-4">MODistribuzione</h1>
 				<p class="lead">Welcome, {{ Auth::user()->name }}!</p>
+				@if (session('success'))
+					<div class="alert alert-success">
+						{{ session('success') }}
+					</div>
+				@endif
 			</div>
 			<div class="col-md-6">
 				<h2>Descrizione del sito</h2>

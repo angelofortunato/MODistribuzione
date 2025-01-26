@@ -41,44 +41,50 @@
 
 		@foreach ($users as $user)
 			@php
-				$products = $user->products->filter(function ($product) {
-				    return $product->pivot->status == 0;
-				});
-				$totalSum = $products->sum(function ($product) {
-				    return $product->price * $product->pivot->quantity;
-				});
+				$groupedProducts = $user->products->groupBy('pivot.purchased_at');
 			@endphp
 
-			@if ($products->isNotEmpty())
-				<div class="table-responsive mb-5">
+			@if ($groupedProducts->isNotEmpty())
+				<div class="mb-5">
 					<h3>{{ $user->name }}</h3>
-					<table class="table-striped table-hover table">
-						<thead class="table-dark">
-							<tr>
-								<th scope="col">Nome Prodotto</th>
-								<th scope="col">Quantità</th>
-								<th scope="col">Prezzo Unitario</th>
-								<th scope="col">Totale</th>
-							</tr>
-						</thead>
-						<tbody class="table-group-divider">
-							@foreach ($products as $product)
-								<tr>
-									<td>{{ $product->name }}</td>
-									<td>{{ $product->pivot->quantity }}</td>
-									<td>{{ $product->price }}&euro;</td>
-									<td>{{ $product->price * $product->pivot->quantity }}&euro;</td>
-								</tr>
-							@endforeach
-							<tr>
-								<td
-									colspan="3"
-									class="text-end"
-								><strong>Totale:</strong></td>
-								<td><strong>{{ $totalSum }}&euro;</strong></td>
-							</tr>
-						</tbody>
-					</table>
+					@foreach ($groupedProducts as $purchasedAt => $products)
+						@php
+							$totalSum = $products->sum(function ($product) {
+							    return $product->price * $product->pivot->quantity;
+							});
+						@endphp
+
+						<div class="table-responsive mb-3">
+							<h5>Acquisto del {{ \Carbon\Carbon::parse($purchasedAt)->format('d/m/Y H:i') }}</h5>
+							<table class="table-striped table-hover table">
+								<thead class="table-dark">
+									<tr>
+										<th scope="col">Nome Prodotto</th>
+										<th scope="col">Quantità</th>
+										<th scope="col">Prezzo Unitario</th>
+										<th scope="col">Totale</th>
+									</tr>
+								</thead>
+								<tbody class="table-group-divider">
+									@foreach ($products as $product)
+										<tr>
+											<td>{{ $product->name }}</td>
+											<td>{{ $product->pivot->quantity }}</td>
+											<td>{{ $product->price }}&euro;</td>
+											<td>{{ $product->price * $product->pivot->quantity }}&euro;</td>
+										</tr>
+									@endforeach
+									<tr>
+										<td
+											colspan="3"
+											class="text-end"
+										><strong>Totale:</strong></td>
+										<td><strong>{{ $totalSum }}&euro;</strong></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					@endforeach
 				</div>
 			@endif
 		@endforeach

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -27,7 +28,13 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/')->with('success', 'Login effettuato con successo');
+            // Log per il debug
+            Log::info('Parametro redirect_to: '.session('redirect_to'));
+
+            // Usa il parametro redirect_to se presente, altrimenti reindirizza alla home
+            $redirectTo = session('redirect_to') ?? '/';
+
+            return redirect()->intended($redirectTo)->with('success', 'Login effettuato con successo');
         }
 
         return back()->withErrors([
