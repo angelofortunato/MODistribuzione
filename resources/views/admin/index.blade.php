@@ -35,7 +35,7 @@
 	<div class="container mt-5">
 		<h2>Admin Dashboard</h2>
 		<p class="lead">Welcome, {{ Auth::user()->name }}!</p>
-
+		<p class="lead">Per visitare l'interfaccia utente <a href="{{ route('user.index') }}">Clicca qui!</a></p>
 		<div class="row">
 			<div class="col-md-4">
 				<div class="card text-center">
