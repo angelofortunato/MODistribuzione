@@ -26,6 +26,10 @@
 		rel="stylesheet"
 		href="{{ asset('css/welcome.css') }}"
 	> <!-- Importa il file CSS -->
+	<link
+		rel="stylesheet"
+		href="{{ asset('css/search.css') }}"
+	> <!-- Importa il file CSS -->
 </head>
 
 <body>
@@ -62,6 +66,7 @@
 
 	</div>
 	@include('partialUser.footer')
+	<script src="{{ asset('js/search.js') }}"></script>
 </body>
 
 </html>

@@ -57,13 +57,13 @@ class CartController extends Controller
     public function simulatePurchase(Request $request)
     {
         if (! Auth::check()) {
-            Log::info('Utente non autenticato, reindirizzamento al login.');
+            // Log::info('Utente non autenticato, reindirizzamento al login.');
             session(['redirect_to' => route('cart.index')]);
 
             return redirect()->route('login');
         }
 
-        Log::info('Utente autenticato, procedendo con la simulazione dell\'acquisto.');
+        // Log::info('Utente autenticato, procedendo con la simulazione dell\'acquisto.');
 
         $cart = session()->get('cart', []);
         $userId = Auth::id();
@@ -83,8 +83,20 @@ class CartController extends Controller
         // Pulisci il carrello dopo l'acquisto
         session()->forget('cart');
 
-        Log::info('Acquisto simulato con successo.');
+        // Log::info('Acquisto simulato con successo.');
 
         return redirect()->route('user.index')->with('success', 'Ordine effettuato con successo');
+    }
+
+    public function removeFromCart($id)
+    {
+        $cart = session()->get('cart');
+
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+            session()->put('cart', $cart);
+        }
+
+        return redirect()->route('cart.index')->with('success', 'Prodotto rimosso dal carrello!');
     }
 }

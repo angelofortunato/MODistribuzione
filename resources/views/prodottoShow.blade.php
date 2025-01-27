@@ -19,6 +19,10 @@
 		rel="stylesheet"
 		href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
 	>
+	<link
+		rel="stylesheet"
+		href="{{ asset('css/search.css') }}"
+	> <!-- Importa il file CSS -->
 	<style>
 		.quantity-input {
 			display: flex;
@@ -62,20 +66,29 @@
 	@include('partialUser.menuUser')
 	<div class="content">
 		<div class="main-content container mt-5">
+
 			<div
 				class="row"
-				style="margin-top: 80px;"
+				style="margin-top: 30px;"
 			>
-				<div class="col-md-4">
+				<h1 class="display-4">Dettaglio Prodotto</h1>
+				<p class="lead">Scegli la quantità che desideri e aggiungi al carrello</p>
+			</div>
+			<hr class="my-2">
+			<div
+				class="row"
+				style="margin-top: 30px;"
+			>
+				<div class="col-md-5">
 					<img
 						src="{{ asset('storage/' . $product->image) }}"
 						class="img-fluid"
 						alt="{{ $product->name }}"
-						style="height: 400px; object-fit: contain;"
+						style="height: 300px; object-fit: contain;"
 					>
 				</div>
-				<div class="col-md-8">
-					<h1 class="display-4">
+				<div class="col-md-7">
+					<h2 class="display-6 mt-3">
 						{{ $product->name }}
 						@if ($product->is_offerta)
 							<span
@@ -83,7 +96,7 @@
 								style="font-size: 1rem;"
 							>In Offerta</span>
 						@endif
-					</h1>
+					</h2>
 					<div class="quantity-input mb-3">
 						<button
 							type="button"
@@ -106,6 +119,7 @@
 						>+</button>
 					</div>
 					<p class="lead"><strong>Prezzo:</strong> <span id="total-price">{{ $product->price }}</span>&euro;</p>
+					<p><strong>Descrizione:</strong></p>
 					<p>{{ $product->description }}</p>
 					<a
 						href="#"
@@ -167,6 +181,7 @@
 			});
 		});
 	</script>
+	<script src="{{ asset('js/search.js') }}"></script>
 </body>
 
 </html>

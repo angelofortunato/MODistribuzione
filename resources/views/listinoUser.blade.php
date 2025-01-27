@@ -18,6 +18,10 @@
 		rel="stylesheet"
 		href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
 	>
+	<link
+		rel="stylesheet"
+		href="{{ asset('css/search.css') }}"
+	> <!-- Importa il file CSS -->
 </head>
 
 <body>
@@ -26,7 +30,7 @@
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"
 	></script>
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	@include('partialUser.menuUser')
 	<div class="container mt-5">
@@ -36,6 +40,9 @@
 		>
 			<h1 class="display-4">Prodotti disponibili sul nostro sito</h1>
 			<p class="lead">Numero di prodotti attivi: {{ $products->total() }}</p>
+			@if (isset($query) && $query)
+				<p class="text-muted">Risultati per la ricerca: "{{ $query }}"</p>
+			@endif
 			<div class="col-md-12 mt-4">
 				<div class="row">
 					@foreach ($products as $product)
@@ -67,12 +74,13 @@
 					@endforeach
 				</div>
 				<div class="d-flex justify-content-center mt-4">
-					{{ $products->links('pagination::bootstrap-4') }}
+					{{ $products->appends(request()->input())->links('pagination::bootstrap-4') }}
 				</div>
 			</div>
 		</div>
 	</div>
 	@include('partialUser.footer')
+	<script src="{{ asset('js/search.js') }}"></script>
 </body>
 
 </html>

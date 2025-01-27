@@ -92,7 +92,7 @@
 						</li>
 					</ul>
 				</div>
-				<div class="col-lg-6 d-flex justify-content-start">
+				<div class="col-lg-6 d-flex justify-content-start search-container">
 					<form
 						class="d-flex w-100 ms-3"
 						method="GET"
@@ -102,13 +102,19 @@
 							class="form-control me-2"
 							type="search"
 							name="search"
+							id="search"
 							placeholder="Search"
 							aria-label="Search"
+							data-url="{{ route('autocomplete') }}"
 						>
 						<button
 							class="btn btn-outline-success"
 							type="submit"
 						><i class="bi bi-search px-2"></i></button>
+						<div
+							id="search-results"
+							class="dropdown-menu w-100"
+						></div>
 					</form>
 				</div>
 				<div class="col-lg-3 d-none d-lg-flex justify-content-end align-items-center">

@@ -22,6 +22,10 @@
 		rel="stylesheet"
 		href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
 	>
+	<link
+		rel="stylesheet"
+		href="{{ asset('css/search.css') }}"
+	> <!-- Importa il file CSS -->
 </head>
 
 <body>
@@ -144,6 +148,7 @@
 	</div>
 
 	@include('partialUser.footer')
+	<script src="{{ asset('js/search.js') }}"></script>
 </body>
 
 </html>

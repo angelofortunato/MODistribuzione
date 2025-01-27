@@ -1,0 +1,13 @@
+.search-container {
+    position: relative;
+    text-align: center;
+}
+
+#search-results {
+    display: inline-block;
+    top: 100%; /* Posiziona il dropdown subito sotto l'input */
+    z-index: 1000;
+    display: none;
+    width: 100%;
+    max-width: 300px; /* Imposta una larghezza massima per il dropdown */
+}

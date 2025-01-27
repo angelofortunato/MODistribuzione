@@ -84,7 +84,10 @@ Route::get('/listino/products/{id}', function ($id) {
     return view('prodottoShow', compact('product'));
 })->name('listino.showProduct');
 
+// Route per il carrello
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/simulate-purchase', [CartController::class, 'simulatePurchase'])->name('cart.simulatePurchase');
-// Route::post('/cart/authenticate', [CartController::class, 'authenticateAndRedirect'])->name('cart.authenticate');
+Route::get('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+
+Route::get('/autocomplete', [ProductController::class, 'autocomplete'])->name('autocomplete');
