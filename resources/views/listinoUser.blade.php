@@ -43,6 +43,19 @@
 			@if (isset($query) && $query)
 				<p class="text-muted">Risultati per la ricerca: "{{ $query }}"</p>
 			@endif
+
+			@if (session('error'))
+				<div class="alert alert-danger">
+					{{ session('error') }}
+				</div>
+			@endif
+
+			@if (session('success'))
+				<div class="alert alert-success">
+					{{ session('success') }}
+				</div>
+			@endif
+
 			<div class="col-md-12 mt-4">
 				<div class="row">
 					@foreach ($products as $product)

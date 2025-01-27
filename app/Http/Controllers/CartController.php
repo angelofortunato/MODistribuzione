@@ -20,26 +20,28 @@ class CartController extends Controller
         $productId = $request->input('product_id');
         $quantity = $request->input('quantity');
 
-        // Recupera il carrello dalla sessione, o crea un nuovo array se non esiste
+        // Logica per aggiungere il prodotto al carrello
+        $product = Product::find($productId);
+        if (! $product) {
+            return redirect()->route('user.listino')->with('error', 'Prodotto non trovato.');
+        }
+
         $cart = session()->get('cart', []);
 
-        // Aggiungi il prodotto al carrello
         if (isset($cart[$productId])) {
             $cart[$productId]['quantity'] += $quantity;
         } else {
-            $product = Product::find($productId);
             $cart[$productId] = [
                 'name'     => $product->name,
                 'quantity' => $quantity,
                 'price'    => $product->price,
-                // 'image'    => $product->image,
+                'image'    => $product->image,
             ];
         }
 
-        // Salva il carrello nella sessione
         session()->put('cart', $cart);
 
-        return response()->json(['success' => true]);
+        return redirect()->route('user.listino')->with('success', 'Prodotto aggiunto al carrello!');
     }
 
     public function index()

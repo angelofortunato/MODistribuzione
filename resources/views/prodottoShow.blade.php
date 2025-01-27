@@ -14,7 +14,6 @@
 		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 		crossorigin="anonymous"
 	>
-
 	<link
 		rel="stylesheet"
 		href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
@@ -42,7 +41,6 @@
 			justify-content: center;
 		}
 
-		/* Aggiungi queste righe */
 		.content {
 			display: flex;
 			flex-direction: column;
@@ -66,7 +64,6 @@
 	@include('partialUser.menuUser')
 	<div class="content">
 		<div class="main-content container mt-5">
-
 			<div
 				class="row"
 				style="margin-top: 30px;"
@@ -97,35 +94,45 @@
 							>In Offerta</span>
 						@endif
 					</h2>
-					<div class="quantity-input mb-3">
-						<button
-							type="button"
-							class="btn btn-outline-secondary"
-							onclick="decrementQuantity()"
-						>-</button>
+					<form
+						action="{{ route('cart.add') }}"
+						method="POST"
+					>
+						@csrf
+						<div class="quantity-input mb-3">
+							<button
+								type="button"
+								class="btn btn-outline-secondary"
+								onclick="decrementQuantity()"
+							>-</button>
+							<input
+								type="number"
+								class="form-control mx-2"
+								id="quantity"
+								name="quantity"
+								value="1"
+								min="1"
+								onchange="updatePrice()"
+							>
+							<button
+								type="button"
+								class="btn btn-outline-secondary"
+								onclick="incrementQuantity()"
+							>+</button>
+						</div>
 						<input
-							type="number"
-							class="form-control mx-2"
-							id="quantity"
-							name="quantity"
-							value="1"
-							min="1"
-							onchange="updatePrice()"
+							type="hidden"
+							name="product_id"
+							value="{{ $product->id }}"
 						>
+						<p class="lead"><strong>Prezzo:</strong> <span id="total-price">{{ $product->price }}</span>&euro;</p>
+						<p><strong>Descrizione:</strong></p>
+						<p>{{ $product->description }}</p>
 						<button
-							type="button"
-							class="btn btn-outline-secondary"
-							onclick="incrementQuantity()"
-						>+</button>
-					</div>
-					<p class="lead"><strong>Prezzo:</strong> <span id="total-price">{{ $product->price }}</span>&euro;</p>
-					<p><strong>Descrizione:</strong></p>
-					<p>{{ $product->description }}</p>
-					<a
-						href="#"
-						class="btn btn-primary mb-5"
-						id="add-to-cart"
-					>Aggiungi al carrello</a>
+							type="submit"
+							class="btn btn-primary mb-5"
+						>Aggiungi al carrello</button>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -158,28 +165,6 @@
 			var totalPrice = basePrice * quantity;
 			totalPriceElement.textContent = totalPrice.toFixed(2);
 		}
-
-		document.getElementById('add-to-cart').addEventListener('click', function(event) {
-			event.preventDefault();
-			var quantity = document.getElementById('quantity').value;
-			var productId = {{ $product->id }};
-
-			$.ajax({
-				url: '{{ route('cart.add') }}',
-				method: 'POST',
-				data: {
-					_token: '{{ csrf_token() }}',
-					product_id: productId,
-					quantity: quantity
-				},
-				success: function(response) {
-					alert('Prodotto aggiunto al carrello!');
-				},
-				error: function(error) {
-					alert('Errore durante l\'aggiunta al carrello.');
-				}
-			});
-		});
 	</script>
 	<script src="{{ asset('js/search.js') }}"></script>
 </body>
