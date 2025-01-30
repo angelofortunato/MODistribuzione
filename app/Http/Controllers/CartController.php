@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Log;
 
 class CartController extends Controller
 {
-    /* public function __construct()
-    {
-        $this->middleware('auth')->only('simulatePurchase');
-    } */
-
     public function add(Request $request)
     {
         $productId = $request->input('product_id');
