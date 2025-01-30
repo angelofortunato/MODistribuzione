@@ -131,4 +131,29 @@ class ProductController extends Controller
 
         return view('welcome', compact('productsOnOffer'));
     }
+
+    public function showListino(Request $request)
+    {
+        $query = $request->input('search');
+        if ($query) {
+            $products = Product::where('is_active', true)
+                ->where('name', 'like', '%'.$query.'%')
+                ->paginate(12)
+                ->appends(['search' => $query]);
+        } else {
+            $products = Product::where('is_active', true)->paginate(12);
+        }
+
+        return view('listinoUser', compact('products', 'query'));
+    }
+
+    public function autocomplete(Request $request)
+    {
+        $query = $request->input('search');
+        $products = Product::where('is_active', true)
+            ->where('name', 'like', '%'.$query.'%')
+            ->get(['id', 'name']);
+
+        return response()->json($products);
+    }
 }

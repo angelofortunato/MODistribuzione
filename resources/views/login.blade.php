@@ -22,6 +22,10 @@
 		rel="stylesheet"
 		href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
 	>
+	<link
+		rel="stylesheet"
+		href="{{ asset('css/search.css') }}"
+	> <!-- Importa il file CSS -->
 </head>
 
 <body class="bg-light">
@@ -31,14 +35,17 @@
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"
 	></script>
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 
 	<div class="col-12 col-lg-8 container mt-5">
-		<div class="card">
+		<div
+			class="card"
+			style="margin-top: 150px; margin-bottom: 250px;"
+		>
 			<div class="card-body">
-				<h2 class="card-title text-center">Login</h2>
-
+				<h2 class="card-title display-3 text-center">MODistribuzione</h2>
+				<h3 class="lead text-center">Sempre un passo avanti</h3>
 				@if ($errors->any())
 					<div class="alert alert-danger">
 						<ul>
@@ -56,10 +63,10 @@
 				<form
 					action="{{ route('login') }}"
 					method="POST"
+					style="margin-top: 50px;"
 				>
 					@csrf
-					<div class="form-group">
-						<label for="email">Email</label>
+					<div class="form-floating mb-3">
 						<input
 							type="email"
 							name="email"
@@ -69,9 +76,9 @@
 							value="{{ old('email') }}"
 							required
 						>
+						<label for="email">Email</label>
 					</div>
-					<div class="form-group mt-2">
-						<label for="password">Password</label>
+					<div class="form-floating mb-3">
 						<input
 							type="password"
 							id="password"
@@ -80,16 +87,18 @@
 							placeholder="Password"
 							required
 						>
+						<label for="password">Password</label>
 					</div>
 					<button
 						type="submit"
-						class="btn btn-primary btn-block mt-2"
-					>Login</button>
+						class="btn btn-primary btn-block mt-3"
+					>Accedi</button>
 				</form>
 			</div>
 		</div>
 	</div>
-
+	@include('partialUser.footer')
+	<script src="{{ asset('js/search.js') }}"></script>
 </body>
 
 </html>

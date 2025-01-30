@@ -14,6 +14,10 @@
 					<div class="card-body">
 						<h5 class="card-title">{{ $product->name }}</h5>
 						<p class="card-text"><strong>Prezzo:</strong> {{ $product->price }}&euro;</p>
+						<a
+							href="{{ route('listino.showProduct', $product->id) }}"
+							class="btn btn-primary"
+						>Acquista ora</a>
 					</div>
 				</div>
 			</div>

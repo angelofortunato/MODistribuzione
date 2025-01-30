@@ -9,7 +9,7 @@
 		>MODistribuzione</a>
 		<div class="d-flex ms-auto">
 			<a
-				href="#"
+				href="{{ route('cart.index') }}"
 				class="d-lg-none me-3"
 			>
 				<i
@@ -35,6 +35,12 @@
 						class="dropdown-menu dropdown-menu-end"
 						aria-labelledby="dropdownUser2"
 					>
+						<li>
+							<a
+								class="dropdown-item"
+								href="{{ route('user.profilo') }}"
+							>Profilo</a>
+						</li>
 						<li>
 							<form
 								id="logout-form-mobile"
@@ -70,33 +76,50 @@
 			id="navbarNav"
 		>
 			<div class="row w-100">
-				<div class="col-lg-3 d-flex align-items-center">
-					<ul class="navbar-nav">
+				<div class="col-lg-3 d-flex align-items-center justify-content-start">
+					<ul class="navbar-nav ms-3">
 						<li class="nav-item">
 							<a
 								class="nav-link"
 								href="/"
 							>Home</a>
 						</li>
+						<li class="nav-item">
+							<a
+								class="nav-link"
+								href="{{ route('user.listino') }}"
+							>Prodotti</a>
+						</li>
 					</ul>
 				</div>
-				<div class="col-lg-6 d-flex justify-content-center">
-					<form class="d-flex w-100">
+				<div class="col-lg-6 d-flex justify-content-start search-container">
+					<form
+						class="d-flex w-100 ms-3"
+						method="GET"
+						action="{{ route('user.listino') }}"
+					>
 						<input
 							class="form-control me-2"
 							type="search"
+							name="search"
+							id="search"
 							placeholder="Search"
 							aria-label="Search"
+							data-url="{{ route('autocomplete') }}"
 						>
 						<button
 							class="btn btn-outline-success"
 							type="submit"
-						><i class="bi bi-search px-2"></i></button><!--Tasto Cerca -->
+						><i class="bi bi-search px-2"></i></button>
+						<div
+							id="search-results"
+							class="dropdown-menu w-100"
+						></div>
 					</form>
 				</div>
 				<div class="col-lg-3 d-none d-lg-flex justify-content-end align-items-center">
 					<a
-						href="#"
+						href="{{ route('cart.index') }}"
 						class="me-3"
 					>
 						<i
@@ -122,6 +145,12 @@
 								class="dropdown-menu dropdown-menu-end"
 								aria-labelledby="dropdownUser1"
 							>
+								<li>
+									<a
+										class="dropdown-item"
+										href="{{ route('user.profilo') }}"
+									>Profilo</a>
+								</li>
 								<li>
 									<form
 										id="logout-form-desktop"

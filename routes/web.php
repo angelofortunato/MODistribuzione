@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductUserController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\UserController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,8 +27,8 @@ Route::get('/', [ProductController::class, 'indexUser'])->name('user.index');
 // Route di Registrazione
 Route::get('/register', function () {
     return view('registration');
-});
-Route::post('register', [RegistrationController::class, 'register']);
+})->name('user.register');
+Route::post('/register', [RegistrationController::class, 'register']);
 // Route di login
 Route::get('/login', function () {
     return view('login');
@@ -35,7 +37,7 @@ Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
 // Route di logout
 Route::post('/logout', [LoginController::class, 'logout'])->name('logoutUser');
 
-// Route per Admin
+// Route accesso protetto per Admin
 Route::middleware(['auth', 'admin'])->group(function () {
     // Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.index');
@@ -59,3 +61,33 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/generate-products/{count}', [ProductController::class, 'generateProducts']);
     Route::get('/generate-users/{count}', [UserController::class, 'generateUsers']);
 });
+// Route accesso protetto per User
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profilo', function () {
+        // Solo utenti autenticati possono accedere a questa rotta
+        return view('profilo');
+    })->name('user.profilo');
+
+    Route::get('/profilo/modifica-password', function () {
+        // Solo utenti autenticati possono accedere a questa rotta
+        return view('modificaPass');
+    })->name('user.modifyPass');
+    Route::post('/user/update-password', [UserController::class, 'updatePassword'])->name('user.updatePassword');
+
+});
+
+// Route Accesso libero per User
+Route::get('/listino', [ProductController::class, 'showListino'])->name('user.listino');
+Route::get('/listino/products/{id}', function ($id) {
+    $product = Product::findOrFail($id);
+
+    return view('prodottoShow', compact('product'));
+})->name('listino.showProduct');
+
+// Route per il carrello
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/simulate-purchase', [CartController::class, 'simulatePurchase'])->name('cart.simulatePurchase');
+Route::get('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+
+Route::get('/autocomplete', [ProductController::class, 'autocomplete'])->name('autocomplete');

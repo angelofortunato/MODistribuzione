@@ -26,6 +26,10 @@
 		rel="stylesheet"
 		href="{{ asset('css/welcome.css') }}"
 	> <!-- Importa il file CSS -->
+	<link
+		rel="stylesheet"
+		href="{{ asset('css/search.css') }}"
+	> <!-- Importa il file CSS -->
 </head>
 
 <body>
@@ -45,7 +49,24 @@
 
 		@include('partialUser.offerteHero')
 
+
+		<div class="hero mt-5 bg-white py-5 text-center">
+			<div class="container">
+				<h1 class="display-4">Scopri i nostri prodotti!</h1>
+				<p class="lead">Esplora la nostra vasta gamma di prodotti di alta qualità a prezzi competitivi.</p>
+				<a
+					href="{{ route('user.listino') }}"
+					class="btn btn-primary"
+				>Vai alla sezione prodotti</a>
+			</div>
+		</div>
+
+
+
+
 	</div>
+	@include('partialUser.footer')
+	<script src="{{ asset('js/search.js') }}"></script>
 </body>
 
 </html>
