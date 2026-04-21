@@ -1,0 +1,66 @@
+services:
+
+  # ─── PHP-FPM ───────────────────────────────────────────────────────────────
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: mo-dis-php
+    restart: unless-stopped
+    volumes:
+      - .:/var/www
+      - ./docker/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+    networks:
+      - mo-dis-network
+    depends_on:
+      - mysql
+
+  # ─── NGINX ─────────────────────────────────────────────────────────────────
+  nginx:
+    image: nginx:alpine
+    container_name: mo-dis-nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www
+      - ./docker/nginx/mo-dis.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - mo-dis-network
+    depends_on:
+      - php
+
+  # ─── MYSQL ─────────────────────────────────────────────────────────────────
+  mysql:
+    image: mysql:8.0
+    container_name: mo-dis-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: mo_distribuzione
+      MYSQL_USER: default
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mo-dis-mysql:/var/lib/mysql
+    networks:
+      - mo-dis-network
+
+  # ─── REDIS ─────────────────────────────────────────────────────────────────
+  redis:
+    image: redis:alpine
+    container_name: mo-dis-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - mo-dis-network
+
+networks:
+  mo-dis-network:
+    driver: bridge
+
+volumes:
+  mo-dis-mysql:
+    driver: local
