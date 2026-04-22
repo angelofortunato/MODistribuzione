@@ -1,66 +1,89 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Guida all'Installazione e Configurazione
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Questa guida illustra tutti i passaggi necessari per installare da zero o riprendere lo sviluppo di **MO Distribuzione** su una nuova macchina. Il progetto utilizza **Docker** e **Docker Compose** per l'infrastruttura (PHP, Nginx, MySQL, Redis).
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 1. Prerequisiti
+Assicurati di avere installati sul tuo computer:
+- [Docker Desktop](https://www.docker.com/products/docker-desktop)
+- [Node.js e NPM](https://nodejs.org/) (necessari per compilare gli asset del frontend tramite Vite)
+- Git
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 2. Inizializzazione del Progetto
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Una volta clonato o aperto il progetto per la prima volta, la cartella potrebbe non contenere le tue configurazioni personali (es. il file `.env`).
 
-## Learning Laravel
+### 2.1 Configurazione dell'Ambiente
+Se il file `.env` non è presente, duplica il file di esempio:
+```bash
+cp .env.example .env
+```
+*(Assicurati che nel `.env` i parametri del database corrispondano a quelli indicati nel `docker-compose.yml`, ovvero `DB_HOST=mysql`, `DB_PORT=3306`, `DB_DATABASE=mo_distribuzione`, `DB_USERNAME=default`, `DB_PASSWORD=secret`)*.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 2.2 Avvio dei Container Docker
+Accendi l'ambiente Docker in background scaricando e costruendo le immagini necessarie:
+```bash
+docker compose up -d --build
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 2.3 Installazione Dipendenze Backend (PHP/Laravel)
+Utilizza Composer direttamente all'interno del container PHP per scaricare tutte le dipendenze:
+```bash
+docker exec mo-dis-php composer install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 2.4 Generazione della Chiave di Sicurezza
+Genera l'Application Key di Laravel (se non è già presente nel `.env`):
+```bash
+docker exec mo-dis-php php artisan key:generate
+```
 
-## Laravel Sponsors
+## 3. Configurazione del Database e dei File
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### 3.1 Creazione Tabelle e Dati Fittizi
+Avvia le migrazioni del database e popola le tabelle con i dati fittizi di prova (tra cui l'amministratore e i prodotti):
+```bash
+docker exec mo-dis-php php artisan migrate:fresh --seed
+```
+*(Nota: usa `migrate` al posto di `migrate:fresh` se vuoi solo aggiornare le tabelle senza cancellare i dati esistenti).*
 
-### Premium Partners
+### 3.2 Collegamento Immagini e Storage
+Affinché le immagini caricate (es. foto prodotti, visure) siano visibili pubblicamente, crea il symlink della cartella storage:
+```bash
+docker exec mo-dis-php php artisan storage:link
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### 3.3 Permessi delle Cartelle (Speciale per Windows)
+Su Windows i volumi Docker potrebbero causare errori di "Permission Denied". Assegna i permessi di scrittura alle cartelle di log e cache:
+```bash
+docker exec -u root mo-dis-php chmod -R 777 storage bootstrap/cache
+```
 
-## Contributing
+## 4. Installazione Dipendenze Frontend e Compilazione (Vite)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Laravel 10 utilizza **Vite** per compilare JavaScript e CSS. Questi comandi vanno eseguiti **dal tuo terminale locale** (non dentro il container Docker).
 
-## Code of Conduct
+Installa le dipendenze Javascript (Vue/Tailwind/Axios):
+```bash
+npm install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Avvia il server di sviluppo per l'Hot Reloading (lascialo in esecuzione in una finestra del terminale mentre lavori):
+```bash
+npm run dev
+```
 
-## Security Vulnerabilities
+Se invece devi mettere il sito in "produzione" e non ti serve l'hot reloading, puoi compilare gli asset una volta sola con:
+```bash
+npm run build
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🎉 Fine! Il sito è pronto.
+A questo punto l'applicazione è funzionante. Puoi accedere a:
+- **Sito Web**: [http://localhost:8080](http://localhost:8080)
+- **Utente Amministratore (generato dal seeder)**:
+  - **Email**: `admin@admin.com` (se l'hai mantenuto) o l'email generata dal tuo seeder.
+  - **Password**: `password`
